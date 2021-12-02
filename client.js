@@ -1,11 +1,11 @@
 const net = require('net');
-
+//const { IP, PORT } = require('')
 
 // below moved from play.js
 const connect = function () {
   const conn = net.createConnection( {
-    host: '10.0.2.15',
-    port: 50541
+    host: '10.0.2.15', // '10.0.2.15' set to local
+    port: 50541,    // 50541 set to local
   });
 
   // interpret incoming data as text
@@ -15,6 +15,8 @@ const connect = function () {
   conn.on('connect', () => {
     console.log('You are now in the game.');
     conn.write('Name: TLC');
+    setTimeout(() => conn.write('Move: up'), 50);
+
   });
 
   // handling data sent from the server
@@ -27,14 +29,7 @@ const connect = function () {
     rl.close();
   });
 
-
-  // // code sets the 'connect' event to log a console message when connection first established
-  // conn.on('connect', () => {
-  //   console.log('You are now in the game.\n')
-  // });
-
 return conn;
 };
-
 
 module.exports = connect;
